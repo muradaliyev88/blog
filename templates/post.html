@@ -1,0 +1,74 @@
+{% extends "header.html" %}
+{% load static %}
+{% block body %}
+{% include 'nav.html' with url=pages%}
+
+    <main>
+      <div class="container">
+        <div class="col-md-12">
+          <div class="blog-post  blog-post--fullwidth">
+            <div class="blog-post-wrapper">
+              <div class="blog-post__info  blog-post__info--top">
+                
+              </div>
+              <div class="blog-post__title">
+                <h1>{{data.title}}</h1>
+              </div>
+              <div class="blog-post__info">
+                <span>By <a href="#">Admin</a></span>
+                <span>{{data.created_at}}</span>
+                <span><a href="#">3 Comments</a></span>
+              </div>
+            </div>
+            <div class="blog-post__image">
+              <img src="{% static data.picture %}" alt="{{data.title}}">
+              
+            </div>
+            <div class="blog-post-wrapper">
+              <div class="blog-post__content">
+                {{data.content|safe}}
+              </div>
+              
+              
+              
+              <div class="blog-post__related">
+                {% for dat in data2 %}
+                <div class="blog-post__related-item">
+                  <a href="{% url 'polls:post' slug=dat.slug %}">
+                    <img style="width:278px;height:186px" src="../static/{{ dat.picture }}" alt="{{dat.title}}">
+                    <h6>{{dat.title}}</h6>
+                  </a>
+                  <span>{{dat.created_at}}</span>
+                </div>   
+                {%endfor%}  
+              </div>           
+              
+                <div class="blog-post__comments-respond">
+                  <h5>Leave a Comment</h5>
+                  <div id="disqus_thread"></div>
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+
+var disqus_config = function () {
+this.page.url = "http://127.0.0.1/post/{{data.slug}}";  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = "http://127.0.0.1/post/{{data.slug}}"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://http-127-0-0-1-8000-post.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>  
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    {% include 'footer.html' %}
+    {%endblock%}

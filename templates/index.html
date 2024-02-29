@@ -1,0 +1,93 @@
+
+<section class="container  top-slider">
+  <div class="col-md-12">
+    <div class="bxslider">
+      {% for d in data %}
+      <div>
+        <div class="featured-image" style="background-image:url(static/{{ d.picture }});">
+          <div class="featured-image__bg"></div>
+          <div class="featured-image__content">
+            <span class="featured-image__content-category">
+              <a href="#">Lifestyle</a>
+            </span>
+            <span class="featured-image__content-title">
+              <a href="{% url 'polls:post' slug=d.slug %}">{{d.title}}</a>
+            </span>
+            <p>{{d.content|truncatewords_html:20|safe}}</p>
+            <span class="featured-image__content-link">
+              <a href="{% url 'polls:post' slug=d.slug %}">Read More</a>
+            </span>
+          </div> 
+        </div>
+      </div>{%endfor%}
+    </div>
+  </div>
+</section>
+
+    <main>
+      <div class="container">
+        <div class="col-md-12  container--grid">  
+            
+
+          <div class="row">  
+            {% for d in data %}         
+            <div class="col-sm-6  col-md-6  blog-post  blog-post--grid">
+              <div class="blog-post-wrapper">
+                <div class="blog-post__info  blog-post__info--top">
+                  
+                </div>
+                <div class="blog-post__title">
+                  <h2><a href="{% url 'polls:post' slug=d.slug %}">{{d.title|truncatechars:30}}</a></h2>
+                </div>
+                <div class="blog-post__info">
+                  
+                  <span>{{d.created_at}}</span>
+                  
+                </div>
+              </div>
+              <div class="blog-post__image">
+                <a href="{% url 'polls:post' slug=d.slug %}" ><img style="width:525px;height:350px" src="static/{{ d.picture }}" alt="{{d.title}}"></a>
+              </div>
+              <div class="blog-post-wrapper">
+                <div class="blog-post__content">
+                  
+                  <p>{{d.content|truncatewords_html:5|safe}}</p>
+                </div>
+                <div class="blog-post__footer">
+                  <a class="blog-post__footer-link" href="{% url 'polls:post' slug=d.slug %}">Read more</a>
+                </div>
+              </div>
+            </div>{%endfor%}
+          </div>
+          
+          <nav class="blog-pagination">
+            <ul class="blog-pagination__items">
+               
+              {% if page_obj.has_previous %}
+              <li class="blog-pagination__item  blog-pagination__item--active">
+                <a href="?page=1">1</a>
+              </li> 
+              <li class="blog-pagination__item">
+                <a href="?page={{ page_obj.previous_page_number }}"> previous</a>
+              </li>
+              
+              {% endif %}
+              <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+
+
+              {% if page_obj.has_next %}
+              
+              <li class="blog-pagination__item">
+                <a href="?page={{ page_obj.next_page_number }}">Next</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+              </li>
+              {% endif %}
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </main>
+
+    

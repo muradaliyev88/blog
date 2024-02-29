@@ -1,0 +1,72 @@
+{% extends "header.html" %}
+{% load static %}
+{% block body %}
+{% include 'nav.html' with url=pages%}
+
+    <main>
+      <div class="container">
+        <div class="col-md-12  col-lg-12">
+          <div class="blog-post  blog-post--fullwidth  blog-post--page">
+            <div class="blog-post__image">
+              <img src="{% static data.picture %}" alt="Contact">
+            </div>
+            <div class="blog-post-wrapper">
+              <div class="blog-post__title">
+                <h1>{{data.title}}</h1>
+              </div>
+              <div class="blog-post__content">
+                {{data.content|safe}}
+              </div>
+              <div class="blog-post__contact">
+                <form action="php/contact-form-handler.php" method="post">
+                  <p class="blog-post__contact-author">
+                    <label for="contact-author">Name*</label>
+                    <input id="contact-author" type="text" name="contact-author" size="30" aria-required="true" required>
+                  </p>
+                  <p class="blog-post__contact-email">
+                    <label for="contact-email">Email*</label>
+                    <input id="contact-email" type="email" name="contact-email" size="30" aria-required="true" required>
+                  </p>
+                  <p class="blog-post__contact-message">
+                    <label for="contact-message">Message</label>
+                    <textarea id="contact-message" name="contact-message" cols="45" aria-required="true"></textarea>
+                  </p>
+                  <p class="blog-post__contact-submit">
+                    <input id="contact-submit" type="submit" name="contact-submit" size="30" value="Send">
+                  </p>
+                </form>
+              </div>
+              <div class="blog-post__footer">
+                <div class="blog-post__footer-social">
+                  <span>Share:</span>
+                  <div class="blog-post__footer-social-icons">
+                    <a href="#">
+                      <svg>
+                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-facebook"></use>
+                      </svg>
+                    </a>
+                    <a href="#">
+                      <svg>
+                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-twitter"></use>
+                      </svg>
+                    </a>
+                    <a href="#">
+                      <svg>
+                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-google"></use>
+                      </svg>
+                    </a>
+                    <a href="#">
+                      <svg>
+                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-pinterest"></use>
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    {% include 'footer.html' %}
+    {%endblock%}
